@@ -18,6 +18,6 @@ else
         vagrant plugin install vagrant-libvirt
         echo
         git clone https://github.com/mariano-italiano/kvm-k8s.git
-        cd kubernetes/vagrant
+        cd kvm-k8s/kubernetes/vagrant
         vagrant up --provider libvirt
 fi
