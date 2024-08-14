@@ -23,7 +23,7 @@ For VirtualBox environment
 $ vagrant up
 ```
 
-### Copy the kubeconfig file from kmaster
+### Copy the kubeconfig file from master
 Password for root user is _kubeadmin_
 ```sh
 $ mkdir ~/.kube
