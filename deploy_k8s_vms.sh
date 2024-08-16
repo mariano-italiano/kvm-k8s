@@ -49,4 +49,24 @@ else
         mkdir -p ~/.kube
         cd
         rm -rf ~/kvm-k8s
+
+        cat <<EOF | sudo tee ~/get_k8s_details.sh
+        MASTER_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep master |awk '{print $5}'`
+        WORKER1_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep worker1 |awk '{print $5}'`
+        WORKER2_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep worker2 |awk '{print $5}'`
+
+        echo
+        echo "---------------------------------------------------------"
+        echo -e "\033[0;30m\033[107mKubernetes Infrastructure details                       \033[0m"
+        echo "---------------------------------------------------------"
+        echo -e " Control plane hostname:      \033[32mmaster\033[0m"
+        echo -e " Control plane IP address:    \033[93m$MASTER_CIDR\033[0m"
+        echo "---------------------------------------------------------"
+        echo -e " Worker1 node hostname:       \033[32mworker1\033[0m"
+        echo -e " Worker1 node IP address:     \033[93m$WORKER1_CIDR\033[0m"
+        echo "---------------------------------------------------------"
+        echo -e " Worker2 node hostname:       \033[32mworker2\033[0m"
+        echo -e " Worker2 node IP address:     \033[93m$WORKER2_CIDR\033[0m"
+        echo "---------------------------------------------------------"
+        EOF
 fi
