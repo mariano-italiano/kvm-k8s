@@ -54,7 +54,6 @@ else
         MASTER_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep master |awk '{print $5}'`
         WORKER1_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep worker1 |awk '{print $5}'`
         WORKER2_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep worker2 |awk '{print $5}'`
-
         echo
         echo "---------------------------------------------------------"
         echo -e "\033[0;30m\033[107mKubernetes Infrastructure details                       \033[0m"
