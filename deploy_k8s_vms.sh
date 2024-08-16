@@ -19,8 +19,8 @@ else
         sudo usermod -aG libvirt atos
         vagrant plugin install vagrant-libvirt
         echo
-        git clone https://github.com/mariano-italiano/kvm-k8s.git
-        cd kvm-k8s/vms/vagrant
+        #git clone https://github.com/mariano-italiano/kvm-k8s.git
+        cd vms/vagrant
         vagrant up --provider libvirt
 
         MASTER_CIDR=`virsh net-dhcp-leases vagrant-libvirt | grep master |awk '{print $5}'`
@@ -47,4 +47,6 @@ else
         echo 'source <(kubectl completion bash)' >>~/.bashrc
         source ~/.bashrc
         mkdir -p ~/.kube
+        cd
+        rm -rf ~/kvm-k8s
 fi
