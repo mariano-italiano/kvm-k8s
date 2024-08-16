@@ -37,8 +37,6 @@ Vagrant.configure(2) do |config|
       v.cpus    = CPUS_MASTER_NODE
     end
 
-    node.vm.provision "shell", path: "bootstrap_master.sh"
-
   end
 
 
@@ -66,8 +64,6 @@ Vagrant.configure(2) do |config|
         v.nested  = true
         v.cpus    = CPUS_WORKER_NODE
       end
-
-      node.vm.provision "shell", path: "bootstrap_worker.sh"
 
     end
 
