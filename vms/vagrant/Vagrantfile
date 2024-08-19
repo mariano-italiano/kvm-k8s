@@ -14,6 +14,8 @@ WORKER_NODES_COUNT  = 2
 
 Vagrant.configure(2) do |config|
 
+  config.vm.provision "shell", path: "bootstrap.sh"
+
   # Kubernetes Master Server
   config.vm.define "master" do |node|
 
