@@ -6,10 +6,10 @@
 $ git clone https://github.com/mariano-italiano/kvm-k8s.git
 ```
 
-### Install 
+### Install 'fresh' VMs
 ```sh
 $ cd kvm-k8s
-$ source deploy_k8s_kvm.sh
+$ source deploy_k8s_vms.sh
 ```
 
 ### Bring up the cluster
@@ -32,6 +32,24 @@ $ scp root@172.16.16.100:/etc/kubernetes/admin.conf ~/.kube/config
 ### Destroy the cluster
 ```
 $ vagrant destroy -f
+```
+
+## Restart procedure
+
+Once the Host Machine will be restarted - KVM Guests will not be automatically up and running. Please do following to make them ready:
+
+Start networks:
+```sh
+virsh net-list --all
+virsh net-start vagrant-libvirt
+virsh net-start vagrant0
+```
+
+Start KVM Guests:
+```sh
+virsh start master
+virsh start worker1
+virsh start worker2
 ```
 
 ## Deploying Add Ons
