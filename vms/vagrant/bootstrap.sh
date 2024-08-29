@@ -16,3 +16,14 @@ cat >>/etc/hosts<<EOF
 172.16.16.101   worker1.example.com    worker1
 172.16.16.102   worker2.example.com    worker2
 EOF
+
+echo "[TASK 11] Disable system-resolved"
+sed -i 's/nameserver 127.0.0.53/nameserver 8.8.8.8/g' /etc/resolv.conf
+systemctl disable --now systemd-resolved.service
+
+echo "[TASK 12] Install and configure resolvconf"
+apt install resolvconf -y
+systemctl enable --now resolvconf.service
+echo 'nameserver 8.8.8.8' > /etc/resolvconf/resolv.conf.d/head
+systemctl restart resolvconf.service
+sed -i 's/nameserver 127.0.0.53/nameserver 8.8.8.8/g' /etc/resolv.conf
