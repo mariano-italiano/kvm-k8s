@@ -9,5 +9,5 @@ sshpass -p "altkom" ssh-copy-id -o StrictHostKeyChecking=no student@master
 sshpass -p "altkom" ssh-copy-id -o StrictHostKeyChecking=no student@node1
 sshpass -p "altkom" ssh-copy-id -o StrictHostKeyChecking=no student@node2
 
-for i in master; do ssh student@$i "sudo -S apt-get remove kubelet kubeadm kubectl docker.io -y; sudo rm /etc/apt/sources.list.d/kubernetes.list; sudo rm -rf /home/student/.kube; sudo kubeadm reset -f"; done 
-for i in node1 node2; do ssh student@$i "sudo -S apt-get remove docker.io -y; sudo kubeadm reset -f; sudo rm /etc/apt/sources.list.d/kubernetes.list"; done
+for i in master; do ssh student@$i "sudo -S apt-get remove kubelet kubeadm kubectl docker.io -y; sudo rm /etc/apt/sources.list.d/kubernetes.list; sudo rm -rf /home/student/.kube; sudo kubeadm reset -f; sudo systemctl unmask kubelet"; done 
+for i in node1 node2; do ssh student@$i "sudo -S apt-get remove docker.io -y; sudo kubeadm reset -f; sudo rm /etc/apt/sources.list.d/kubernetes.list; sudo systemctl unmask kubelet"; done
